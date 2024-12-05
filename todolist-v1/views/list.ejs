@@ -1,0 +1,44 @@
+<%- include("header") -%>
+
+    <div class="box" id="heading">
+        <h1><%= listTittle %></h1>
+    </div>
+
+    <div class="box">
+        <ul>
+            <% for(var i = 0; i < newListItems.length; i++) { %>
+                <li class="item">
+                    <input type="checkbox">  
+                    <p><%= newListItems[i] %></p>
+                </li> 
+            <% } %>
+        </ul>
+     
+        <form class="item" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item">
+            <button type="submit" name="list" value="<%= listTittle === 'Work List' ? 'Work' : 'Main' %>">+</button>
+        </form>
+
+    </div>
+   
+    <%- include("footer") -%>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Iterate through each checkbox
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    const listItem = checkbox.closest('li');
+                    // Toggle the "checked" class based on the checkbox state
+                    if (checkbox.checked) {
+                        listItem.classList.add('checked');
+                    } else {
+                        listItem.classList.remove('checked');
+                    }
+                });
+            });
+        });
+    </script>
+    
