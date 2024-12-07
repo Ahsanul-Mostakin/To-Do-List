@@ -1,0 +1,44 @@
+<%- include("header") -%>
+
+<div class="box" id="heading">
+    <h1><%= listTittle %></h1>
+</div>
+
+<div class="box">
+    <ul>
+        <% newListItems.forEach(function(item){ %>
+            <form action="/delete" method="post">
+                <li class="item">
+                    <input type="checkbox" name="checkbox" onChange="this.form.submit()" value="<%= item._id %>" 
+                    <%= item.completed ? "checked" : "" %> >
+                    <p><%= item.name %></p>
+                </li>
+            </form>
+        <% }) %>
+    </ul>
+
+    <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" required>
+        <button type="submit">+</button>
+    </form>
+</div>
+
+<%- include("footer") -%>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                const listItem = checkbox.closest('li');
+            
+                if (checkbox.checked) {
+                    listItem.classList.add('checked');
+                } else {
+                    listItem.classList.remove('checked');
+                }
+            });
+        });
+    });
+</script>
