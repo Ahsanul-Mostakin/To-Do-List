@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -11,13 +10,12 @@ app.set("view engine", "ejs");
 
 const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB successfully.");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("Connected to MongoDB successfully."))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 const itemSchema = new mongoose.Schema({
   name: String,
@@ -37,7 +35,7 @@ const defaultItems = [
 
 app.get("/", async function (req, res) {
   try {
-    const foundItems = await Item.find({ name: { $nin: ["Write code", "new Item"] } });
+    const foundItems = await Item.find();
 
     if (foundItems.length === 0) {
       await Item.insertMany(defaultItems);
