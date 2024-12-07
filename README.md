@@ -11,7 +11,7 @@
 - **Responsive UI**: Clean and minimal UI that adapts to different screen sizes.
 - **Persistent Data Handling**: Uses in-memory arrays to store task data (for demo purposes, can be extended to use databases).
 
-### Version 2
+### Current Version
 
 - **Database Integration**: Utilizes MongoDB for persistent data storage.
 - **Enhanced Task Management**: Includes completion status for tasks.
