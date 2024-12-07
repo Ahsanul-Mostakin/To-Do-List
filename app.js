@@ -8,7 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-const MONGO_URI = process.env.MONGO_URI;
+
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/todolist';
+
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
